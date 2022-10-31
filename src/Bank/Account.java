@@ -21,9 +21,11 @@ public class Account {
         if(account !=null && person !=null) {
             if(Bank.verifyAccount(account, person)) {
                 return account.balance;
+            } else {
+                System.out.println("Your balance could not be retrieved due to an account information mismatch.");
             }
         } else {
-            System.out.println("Your balance could not be retrieved.");
+            System.out.println("Your balance could not be retrieved due to an unexpected error.");
         }
         return 0.00001;
     }
