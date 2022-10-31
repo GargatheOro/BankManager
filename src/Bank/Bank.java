@@ -30,18 +30,21 @@ public class Bank {
         Main.Main.mainMenu();
     }
 
+    //Retrieves the information of an account based on last name
     private static Person getPerson() {
         Scanner scanner = new Scanner(System.in);
         int entry = scanner.nextInt();
         return registry.get(registry.indexOf(entry));
     }
 
+    //Retrieves the information of an account based on SSN
     private static Account getAccount() {
         Scanner scanner = new Scanner(System.in);
         int entry = scanner.nextInt();
         return bank.get(bank.indexOf(entry));
     }
 
+    //Ensures account matches user
     public static boolean accountVerifier() {
         Person person = getPerson();
         Account account = getAccount();
