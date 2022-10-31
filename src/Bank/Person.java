@@ -1,12 +1,10 @@
 package Bank;
 
-import java.util.Scanner;
-
 public class Person {
 
-    static String firstName;
-    static String middleName;
-    static String lastName;
+    protected static String firstName;
+    protected static String middleName;
+    protected static String lastName;
     static int age;
     protected static int SSN;
 
@@ -16,9 +14,5 @@ public class Person {
         this.lastName = lastName;
         this.age = age;
         this.SSN = SSN;
-    }
-
-    public static void getFullName() {
-        System.out.println(firstName + middleName + lastName);
     }
 }

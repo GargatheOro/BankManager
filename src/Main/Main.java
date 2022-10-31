@@ -1,11 +1,8 @@
 package Main;
 
 import Bank.Account;
-import Bank.Person;
 
 import java.util.*;
-
-import static Bank.Bank.registry;
 
 public class Main {
 
@@ -23,16 +20,24 @@ public class Main {
         System.out.println("To make a withdrawal, type '/with'.");
         System.out.println("To open a new account, type '/open'.");
         System.out.println("To exit this program, type anything else.");
-        if (scanner.nextLine().equals("/bal")) {
-            Account.checkBalance();
-        } else if (scanner.nextLine().equals("/dep")) {
+        String command = scanner.nextLine();
+        if (command.equals("/bal")) {
+            double bal = Account.checkBalance();
+            System.out.println("Your balance is: $" + bal);
+            System.out.println("Returning you to the main menu now.");
+            mainMenu();
+        } else if (command.equals("/dep")) {
             Account.depositFunds();
-        } else if (scanner.nextLine().equals("/with")) {
+            System.out.println("Returning you to the main menu now.");
+        } else if (command.equals("/with")) {
             Account.withdrawFunds();
-        } else if (scanner.nextLine().equals("/open")) {
+            System.out.println("Returning you to the main menu now.");
+        } else if (command.equals("/open")) {
             Bank.Bank.openAccount();
+            System.out.println("Returning you to the main menu now.");
         } else {
-            return;
+            System.out.println("Thank you for using Oro Bank services.");
+            System.exit(0);
         }
     }
 }

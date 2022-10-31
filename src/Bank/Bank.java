@@ -3,11 +3,14 @@ package Bank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Bank {
 
     public static List<Person> registry = new ArrayList<>();
     public static List<Account> bank = new ArrayList<>();
+
+    //Registers a new person and a corresponding account
     public static void openAccount() {
         Scanner opener = new Scanner(System.in);
         System.out.println("Thank you for choosing to open an account with Oro Bank! We need some information from you.");
@@ -21,41 +24,72 @@ public class Bank {
         int age = opener.nextInt();
         System.out.println("Please provide your Social Security number:");
         int SSN = opener.nextInt();
-        registry.add(new Person(firstName, middleName, lastName, age, SSN));
         System.out.println("Please state your initial deposit:");
         int initialDeposit = opener.nextInt();
-        System.out.println("Please verify your Social Security number:");
-        bank.add(new Account(initialDeposit, SSN, getPerson()));
-        System.out.println("Account opened successfully! Your account number is your SSN. Thank you!");
+        int newAccountNumber = generateAccountNumber();
+        registry.add(new Person(firstName, middleName, lastName, age, SSN));
+        bank.add(new Account(initialDeposit, newAccountNumber, registry.get(registry.indexOf(SSN))));
+        System.out.println("Account opened successfully! Your account number is " + newAccountNumber + ". Thank you!");
         Main.Main.mainMenu();
     }
 
     //Retrieves the information of an account based on last name
-    private static Person getPerson() {
-        Scanner scanner = new Scanner(System.in);
-        int entry = scanner.nextInt();
-        return registry.get(registry.indexOf(entry));
+    public static Person getPerson() {
+        Scanner scannerper = new Scanner(System.in);
+        System.out.println("Please provide your 9-digit Social Security number:");
+        int entry = scannerper.nextInt();
+        for(Person person : registry) {
+            if(entry == person.SSN) {
+                System.out.println("User pulled successfully: " + person.SSN);
+                return person;
+            }
+        }
+        return null;
     }
 
     //Retrieves the information of an account based on SSN
-    private static Account getAccount() {
-        Scanner scanner = new Scanner(System.in);
-        int entry = scanner.nextInt();
-        return bank.get(bank.indexOf(entry));
+    public static Account getAccount() {
+        Scanner scanneracc = new Scanner(System.in);
+        System.out.println("Please provide your 5-digit account number:");
+        int entry = scanneracc.nextInt();
+        for(Account account : bank) {
+            if(entry == account.accountNumber) {
+                System.out.println("Account pulled successfully: " + account.accountNumber);
+                return account;
+            }
+        }
+        return null;
     }
 
     //Ensures account matches user
-    public static boolean accountVerifier() {
-        Person person = getPerson();
-        Account account = getAccount();
-        if(person.SSN == account.accountNumber) {
+    public static boolean verifyAccount(Account account, Person person) {
+        if(person == account.accountOwner) {
+            System.out.println("Your account has been successfully verified.");
             return true;
         } else {
+            System.out.println("Your account could not be verified.");
             return false;
         }
     }
 
+    //Registers the test users and their accounts
     public static void registerDefaults() {
         registry.add(new Person("Andrew", "Walter", "Hart", 36, 573041748));
+        registry.add(new Person("Leah", "Madison", "Smith", 28, 591673815));
+        registry.add(new Person("Chloe", "Lynn", "White", 25, 678180561));
+        bank.add(new Account(500, 57369, registry.get(0)));
+        bank.add(new Account(150, 20682, registry.get(1)));
+        bank.add(new Account(50000, 74856, registry.get(2)));
+    }
+
+    //Generates a unique 5-digit account number
+    public static int generateAccountNumber() {
+        int random = ThreadLocalRandom.current().nextInt(10000, 99999);
+        for (int i = 0; i < 2; i++) {
+            if (bank.indexOf(random) != random) {
+                break;
+            } else i--;
+        }
+        return random;
     }
 }
