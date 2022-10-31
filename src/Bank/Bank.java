@@ -26,7 +26,7 @@ public class Bank {
         int SSN = opener.nextInt();
         System.out.println("The minimum initial deposit is $10. Please state your initial deposit:");
         double initialDeposit = opener.nextDouble();
-        if(initialDeposit < 10) {
+        if (initialDeposit < 10) {
             System.out.println("The initial deposit is $10. Please try again.");
             openAccount();
             return;
@@ -43,8 +43,8 @@ public class Bank {
         Scanner scannerper = new Scanner(System.in);
         System.out.println("Please provide your 9-digit Social Security number:");
         int entry = scannerper.nextInt();
-        for(Person person : registry) {
-            if(entry == person.SSN) {
+        for (Person person : registry) {
+            if (entry == person.SSN) {
                 System.out.println("User pulled successfully: " + person.SSN);
                 System.out.println("Hello " + person.firstName + " " + person.lastName);
                 return person;
@@ -55,8 +55,8 @@ public class Bank {
 
     //Retrieves the information of an account for the purposes of opening new accounts (array input)
     public static Person pullPerson(int ssn) {
-        for(Person person : registry) {
-            if(ssn == person.SSN) {
+        for (Person person : registry) {
+            if (ssn == person.SSN) {
                 return person;
             }
         }
@@ -68,8 +68,8 @@ public class Bank {
         Scanner scanneracc = new Scanner(System.in);
         System.out.println("Please provide your 5-digit account number:");
         int entry = scanneracc.nextInt();
-        for(Account account : bank) {
-            if(entry == account.accountNumber) {
+        for (Account account : bank) {
+            if (entry == account.accountNumber) {
                 System.out.println("Account pulled successfully: " + account.accountNumber);
                 System.out.println("Account owner: " + account.accountOwner.firstName);
                 return account;
@@ -80,7 +80,7 @@ public class Bank {
 
     //Ensures account matches user
     public static boolean verifyAccount(Account account, Person person) {
-        if(person == account.accountOwner) {
+        if (person == account.accountOwner) {
             System.out.println("Your account has been successfully verified as " + person.firstName + " " + person.lastName + "'s account owned by " + account.accountOwner.firstName);
             return true;
         } else {
