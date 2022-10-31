@@ -25,15 +25,16 @@ public class Bank {
         System.out.println("Please provide your Social Security number:");
         int SSN = opener.nextInt();
         System.out.println("Please state your initial deposit:");
-        int initialDeposit = opener.nextInt();
+        double initialDeposit = opener.nextDouble();
         int newAccountNumber = generateAccountNumber();
+        System.out.println("Account number generated successfully: " + newAccountNumber);
         registry.add(new Person(firstName, middleName, lastName, age, SSN));
-        bank.add(new Account(initialDeposit, newAccountNumber, registry.get(registry.indexOf(SSN))));
+        bank.add(new Account(initialDeposit, newAccountNumber, pullPerson(SSN)));
         System.out.println("Account opened successfully! Your account number is " + newAccountNumber + ". Thank you!");
         Main.Main.mainMenu();
     }
 
-    //Retrieves the information of an account based on last name
+    //Retrieves the information of a person based on SSN
     public static Person getPerson() {
         Scanner scannerper = new Scanner(System.in);
         System.out.println("Please provide your 9-digit Social Security number:");
@@ -48,7 +49,17 @@ public class Bank {
         return null;
     }
 
-    //Retrieves the information of an account based on SSN
+    //Retrieves the information of an account for the purposes of opening new accounts (array input)
+    public static Person pullPerson(int ssn) {
+        for(Person person : registry) {
+            if(ssn == person.SSN) {
+                return person;
+            }
+        }
+        return null;
+    }
+
+    //Retrieves the information of an account based on account number
     public static Account getAccount() {
         Scanner scanneracc = new Scanner(System.in);
         System.out.println("Please provide your 5-digit account number:");
