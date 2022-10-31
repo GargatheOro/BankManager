@@ -1,5 +1,6 @@
 package Bank;
 
+import java.security.Principal;
 import java.util.Scanner;
 
 public class Account {
@@ -46,9 +47,18 @@ public class Account {
         Account account = Bank.getAccount();
         Person person = Bank.getPerson();
         if(Bank.verifyAccount(account, person)) {
-            System.out.println("Please state the amount of money you wish to withdraw (Ex: 17.62).");
+            System.out.println("Please state the amount of money you wish to withdraw (Ex: 17.62), to a maximum of $1000.");
             amount = receiver.nextDouble();
-            account.balance = account.balance - amount;
+            if (amount > 1000) {
+                System.out.println("The maximum daily withdraw amount is $1000. We are modifying your withdrawal.");
+                amount = 1000;
+            }
+            double proposal = account.balance - amount;
+            if(proposal > account.balance) {
+                System.out.println("Overdrafting is disabled at Oro Bank. We are modifying your withdrawal.");
+                proposal = account.balance;
+            }
+            account.balance = proposal;
             System.out.println("You have successfully withdrawn $" + amount + " from account #" + account.accountNumber + ".");
             System.out.println("Your new balance is $" + account.balance + ". Thank you.");
         }

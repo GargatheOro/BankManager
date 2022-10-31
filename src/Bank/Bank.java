@@ -24,8 +24,12 @@ public class Bank {
         int age = opener.nextInt();
         System.out.println("Please provide your Social Security number:");
         int SSN = opener.nextInt();
-        System.out.println("Please state your initial deposit:");
+        System.out.println("The minimum initial deposit is $10. Please state your initial deposit:");
         double initialDeposit = opener.nextDouble();
+        if(initialDeposit < 10) {
+            System.out.println("The initial deposit is $10. Please try again.");
+            openAccount();
+        }
         int newAccountNumber = generateAccountNumber();
         System.out.println("Account number generated successfully: " + newAccountNumber);
         registry.add(new Person(firstName, middleName, lastName, age, SSN));
