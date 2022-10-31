@@ -29,6 +29,7 @@ public class Bank {
         if(initialDeposit < 10) {
             System.out.println("The initial deposit is $10. Please try again.");
             openAccount();
+            return;
         }
         int newAccountNumber = generateAccountNumber();
         System.out.println("Account number generated successfully: " + newAccountNumber);
