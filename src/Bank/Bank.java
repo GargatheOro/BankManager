@@ -7,8 +7,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Bank {
 
-    public static List<Person> registry = new ArrayList<>();
-    public static List<Account> bank = new ArrayList<>();
+    protected static List<Person> registry = new ArrayList<>();
+    protected static List<Account> bank = new ArrayList<>();
 
     //Registers a new person and a corresponding account
     public static void openAccount() {
@@ -31,7 +31,6 @@ public class Bank {
         registry.add(new Person(firstName, middleName, lastName, age, SSN));
         bank.add(new Account(initialDeposit, newAccountNumber, pullPerson(SSN)));
         System.out.println("Account opened successfully! Your account number is " + newAccountNumber + ". Thank you!");
-        Main.Main.mainMenu();
     }
 
     //Retrieves the information of a person based on SSN

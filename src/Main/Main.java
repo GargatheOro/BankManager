@@ -29,12 +29,15 @@ public class Main {
         } else if (command.equals("/dep")) {
             Account.depositFunds();
             System.out.println("Returning you to the main menu now.");
+            mainMenu();
         } else if (command.equals("/with")) {
             Account.withdrawFunds();
             System.out.println("Returning you to the main menu now.");
+            mainMenu();
         } else if (command.equals("/open")) {
             Bank.Bank.openAccount();
             System.out.println("Returning you to the main menu now.");
+            mainMenu();
         } else {
             System.out.println("Thank you for using Oro Bank services.");
             System.exit(0);
