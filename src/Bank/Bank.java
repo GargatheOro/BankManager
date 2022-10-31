@@ -41,6 +41,7 @@ public class Bank {
         for(Person person : registry) {
             if(entry == person.SSN) {
                 System.out.println("User pulled successfully: " + person.SSN);
+                System.out.println("Hello " + person.firstName + " " + person.lastName);
                 return person;
             }
         }
@@ -55,6 +56,7 @@ public class Bank {
         for(Account account : bank) {
             if(entry == account.accountNumber) {
                 System.out.println("Account pulled successfully: " + account.accountNumber);
+                System.out.println("Account owner: " + account.accountOwner.firstName);
                 return account;
             }
         }
@@ -64,7 +66,7 @@ public class Bank {
     //Ensures account matches user
     public static boolean verifyAccount(Account account, Person person) {
         if(person == account.accountOwner) {
-            System.out.println("Your account has been successfully verified.");
+            System.out.println("Your account has been successfully verified as " + person.firstName + " " + person.lastName + "'s account owned by " + account.accountOwner.firstName);
             return true;
         } else {
             System.out.println("Your account could not be verified.");
