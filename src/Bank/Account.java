@@ -1,11 +1,10 @@
 package Bank;
 
-import java.security.Principal;
 import java.util.Scanner;
 
 public class Account {
-    protected static double balance;
-    protected static int accountNumber;
+    protected double balance;
+    protected int accountNumber;
     Person accountOwner;
     static Scanner receiver = new Scanner(System.in);
 

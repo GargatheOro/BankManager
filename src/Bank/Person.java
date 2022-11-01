@@ -2,11 +2,11 @@ package Bank;
 
 public class Person {
 
-    protected static String firstName;
-    protected static String middleName;
-    protected static String lastName;
-    static int age;
-    protected static int SSN;
+    protected String firstName;
+    protected String middleName;
+    protected String lastName;
+    int age;
+    protected int SSN;
 
     public Person(String firstName, String middleName, String lastName, int age, int SSN) {
         this.firstName = firstName;
