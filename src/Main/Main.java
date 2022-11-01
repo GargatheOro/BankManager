@@ -2,8 +2,7 @@ package Main;
 
 import Bank.Account;
 
-import java.sql.SQLOutput;
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
 
@@ -22,26 +21,32 @@ public class Main {
         System.out.println("To open a new account, type '/open'.");
         System.out.println("To exit this program, type anything else.");
         String command = scanner.nextLine();
-        if (command.equals("/bal")) {
-            double bal = Account.checkBalance();
-            System.out.println("Your balance is: $" + bal);
-            System.out.println("Returning you to the main menu now.");
-            mainMenu();
-        } else if (command.equals("/dep")) {
-            Account.depositFunds();
-            System.out.println("Returning you to the main menu now.");
-            mainMenu();
-        } else if (command.equals("/with")) {
-            Account.withdrawFunds();
-            System.out.println("Returning you to the main menu now.");
-            mainMenu();
-        } else if (command.equals("/open")) {
-            Bank.Bank.openAccount();
-            System.out.println("Returning you to the main menu now.");
-            mainMenu();
-        } else {
-            System.out.println("Thank you for using Oro Bank services.");
-            System.exit(0);
+        switch (command) {
+            case "/bal" -> {
+                double bal = Account.checkBalance();
+                System.out.println("Your balance is: $" + bal);
+                System.out.println("Returning you to the main menu now.");
+                mainMenu();
+            }
+            case "/dep" -> {
+                Account.depositFunds();
+                System.out.println("Returning you to the main menu now.");
+                mainMenu();
+            }
+            case "/with" -> {
+                Account.withdrawFunds();
+                System.out.println("Returning you to the main menu now.");
+                mainMenu();
+            }
+            case "/open" -> {
+                Bank.Bank.openAccount();
+                System.out.println("Returning you to the main menu now.");
+                mainMenu();
+            }
+            default -> {
+                System.out.println("Thank you for using Oro Bank services.");
+                System.exit(0);
+            }
         }
     }
 }
