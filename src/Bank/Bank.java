@@ -101,11 +101,14 @@ public class Bank {
 
     //Generates a unique 5-digit account number
     public static int generateAccountNumber() {
-        int random = ThreadLocalRandom.current().nextInt(10000, 99999);
+        int random = 0;
         for (int i = 0; i < 2; i++) {
-            if (bank.indexOf(random) != random) {
-                break;
-            } else i--;
+            random = ThreadLocalRandom.current().nextInt(10000, 99999);
+            for (Account account : bank) {
+                if (account.accountNumber == random) {
+                    i--;
+                }
+            }
         }
         return random;
     }
